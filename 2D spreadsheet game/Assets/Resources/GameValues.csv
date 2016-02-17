@@ -23,7 +23,7 @@ keshaProjectileVelocity,0,-1
 keshaProjectileGlowSpeed,6,
 keshaProjectileDamage,10,
 keshaProjectileVariance,5,0
-keshaEnemySpeed,2.5,0
+keshaEnemySpeed,-2.5,0
 keshaEnemyHealth,15,
 keshaEnemyFireCooldownTime,2,
 keshaEnemyWrapScreen,TRUE,
@@ -34,9 +34,9 @@ aeroflotEnemyFireCooldownTime,3,
 aeroflotEnemyWrapScreen,FALSE,
 aeroflotEnemyRammingDamage,5,
 billEnemyHealth,8,
-billEnemySpeed,-5,2
+billEnemySpeed,3,-3
 billEnemyFireCooldownTime,2,
-billEnemyWrapScreen,TRUE,
+billEnemyWrapScreen,FALSE,
 billEnemyRammingDamage,10,
 carEnemySpeed,1,1
 carEnemyHealth,4,
