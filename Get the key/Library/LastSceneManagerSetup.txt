@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/Door&Key Feb.18th.unity
+  isLoaded: 1
+  isActive: 1
