@@ -18,7 +18,7 @@ public class playerController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Space)) {
 			//jump = true;
 			animator.SetBool ("jump", true);
-		} else {
+		}else {
 			animator.SetBool ("jump", false);
 
 		}
