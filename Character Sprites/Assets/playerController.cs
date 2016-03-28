@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyDown("1")) {
+		if (Input.GetKey("1")) {
 			animator.SetBool ("walk", true);
 		}else {
 			animator.SetBool ("walk", false);
@@ -39,37 +39,37 @@ public class playerController : MonoBehaviour {
 		}
 
 		if (Input.GetKey("3")) {
-			animator.SetBool ("elongate", true);
-		}else {
-			animator.SetBool ("elongate", false);
-
-		}
-
-		if (Input.GetKey("4")) {
 			animator.SetBool ("transform1", true);
 		}else {
 			animator.SetBool ("transform1", false);
 
 		}
 
-		if (Input.GetKey("5")) {
+		if (Input.GetKey("4")) {
 			animator.SetBool ("roll", true);
 		}else {
 			animator.SetBool ("roll", false);
 
 		}
 
-		if (Input.GetKey("6")) {
+		if (Input.GetKey("5")) {
 			animator.SetBool ("transform2", true);
 		}else {
 			animator.SetBool ("transform2", false);
 
 		}
 
-		if (Input.GetKey("7")) {
+		if (Input.GetKey("6")) {
 			animator.SetBool ("changeFace", true);
 		}else {
 			animator.SetBool ("changeFace", false);
+
+		}
+
+		if (Input.GetKey("7")) {
+			animator.SetBool ("elongate", true);
+		}else {
+			animator.SetBool ("elongate", false);
 
 		}
 			
