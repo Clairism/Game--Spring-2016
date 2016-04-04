@@ -12,6 +12,7 @@ public class player : MonoBehaviour {
 	public GameObject thread;
 	Vector3 currentPosition;
 	Vector3 endPosition;
+	Vector3 end;
 	float pct;
 	public float shootTime;
 	bool shooted;
@@ -34,7 +35,7 @@ public class player : MonoBehaviour {
 
 		lifeCounter = 50;
 		//size = 1;
-		currentPosition = transform.position;
+		pct = 0;
 
 	}
 
@@ -46,19 +47,27 @@ public class player : MonoBehaviour {
 		posX = GetComponent<Transform> ().position.x;
 		posY = GetComponent<Transform> ().position.y;
 
+		//jumping gravity
 		if (posY < 0) {
 			rb.gravityScale = 0;
 			transform.position = new Vector3 (posX, 0, 4);
 
-		} else if (posY > 0){
+		} else if (posY > 0 && jumped){
 
 			rb.gravityScale = 0.5f;
 
 		}
-			
-//		currentPosition = transform.position;
-//		endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
-//		transform.position = Vector3.Lerp (currentPosition, endPosition, 1.0f * Time.deltaTime);
+
+		//lerp to grab
+
+		if (pct <= 1) {
+			pct += 0.1f;
+		} else {
+			pct = 1;
+		}
+
+		currentPosition = transform.position;
+		endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
 
 		//changing size
 		/*
@@ -134,20 +143,20 @@ public class player : MonoBehaviour {
 			shootTime += Time.deltaTime;
 			shooted = true;
 
+
 		}else if (Input.GetKey (KeyCode.Z) == false && shooted) {
-
-			currentPosition = transform.position;
-
+			
 			transform.eulerAngles = new Vector3(0, 0, 90);
 			animator.SetBool ("shoot", false);
-			print (endPosition);
+
+			transform.position = Vector3.Lerp (currentPosition, endPosition, pct);
+
+			end = new Vector3 (endPosition.x + 2.5f, - endPosition.y, 4);
+			transform.position = Vector3.Lerp (endPosition, end, pct);
 
 			shootThread ();
-
 			shootTime = 0;
 			shooted = false;
-
-			print (currentPosition);
 
 		}
 
