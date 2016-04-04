@@ -13,7 +13,7 @@ public class destroy : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerEnter2D(Collider2D other) {
 
 		if (other.tag != "Player") {
 			Destroy (other.gameObject);

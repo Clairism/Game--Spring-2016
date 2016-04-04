@@ -27,7 +27,7 @@ public class swatSpawner : MonoBehaviour {
 
 	void spawn(){
 
-		spawnTime = Random.Range(3, 10);
+		spawnTime = Random.Range(8, 15);
 		//print (spawnTime);
 		Instantiate (obj);	
 	}
