@@ -148,7 +148,7 @@ public class player : MonoBehaviour {
 			endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
 
 			//lerping if it's close enough
-			if ((endPosition.x - currentPosition.x) <= 2.5f) {
+			if ((endPosition.x - currentPosition.x) <= 2.5f && (endPosition.x - currentPosition.x) >= 0f) {
 				
 				transform.position = Vector3.Lerp (currentPosition, endPosition, 1);
 
