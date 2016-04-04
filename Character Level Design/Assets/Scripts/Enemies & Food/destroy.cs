@@ -18,5 +18,5 @@ public class destroy : MonoBehaviour {
 		if (other.tag != "Player") {
 			Destroy (other.gameObject);
 		}
-
+	}
 }
