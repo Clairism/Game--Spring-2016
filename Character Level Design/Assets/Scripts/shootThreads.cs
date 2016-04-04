@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class shootThreads : player {
+public class shootThreads : MonoBehaviour {
 
 	LineRenderer line;
-	public int lengthOfLineRenderer = 5;
+	//public int lengthOfLineRenderer = 5;
+
+	Vector3 player;
+	Vector3 grab;
 
 
 	// Use this for initialization
@@ -12,17 +15,33 @@ public class shootThreads : player {
 
 		line = GetComponent<LineRenderer>();
 
-		line.SetVertexCount(lengthOfLineRenderer);
-	
+		//line.SetVertexCount(lengthOfLineRenderer);
+		player = GameObject.Find ("Player").transform.position;
+		grab = GameObject.FindGameObjectWithTag ("grab").transform.position;
+
 	}
-	/*
 	// Update is called once per frame
-	public override void Update () {
+	void Update () {
 
-		Vector3 pos = new Vector3(posX, posY, 0);
-		line.SetPosition(shootTime, pos);
+		line.SetPosition (0, new Vector3(player.x, player.y, player.z));
 
+		if((grab.x - player.x) <= 2.5f ){
+			
+			line.SetPosition (1, new Vector3(grab.x, grab.y, grab.z));
+
+			Invoke ("destroy", 3f);
+
+
+		}else{
+			line.SetPosition (1, new Vector3(player.x + 1f, player.y + 1f, player.z));
+
+			Invoke ("destroy", 1f);
+		}
 	
 	}
-	*/
+
+	void destroy(){
+		Destroy (gameObject);
+	}
+
 }

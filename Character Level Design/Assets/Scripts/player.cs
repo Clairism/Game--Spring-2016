@@ -6,11 +6,15 @@ public class player : MonoBehaviour {
 	Animator animator;
 	Rigidbody2D rb;
 
-	public GameObject thread;
-	public float shootTime;
-
 	float playerSpeed;
 	float posX, posY;
+
+	public GameObject thread;
+	Vector3 currentPosition;
+	Vector3 endPosition;
+	float pct;
+	public float shootTime;
+	bool shooted;
 
 	float jumpTime, jumpDelay = .3f;
 	bool jumped;
@@ -30,6 +34,7 @@ public class player : MonoBehaviour {
 
 		lifeCounter = 50;
 		//size = 1;
+		currentPosition = transform.position;
 
 	}
 
@@ -50,6 +55,10 @@ public class player : MonoBehaviour {
 			rb.gravityScale = 0.5f;
 
 		}
+			
+//		currentPosition = transform.position;
+//		endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
+//		transform.position = Vector3.Lerp (currentPosition, endPosition, 1.0f * Time.deltaTime);
 
 		//changing size
 		/*
@@ -65,6 +74,7 @@ public class player : MonoBehaviour {
 	}
 
 	void changeStates(){
+
 
 		//run
 		if(Input.GetAxis("Horizontal") != 0){
@@ -85,10 +95,10 @@ public class player : MonoBehaviour {
 		}
 
 		//jump
-		if (Input.GetKey(KeyCode.Space) && posY <= 1) {
+		if (Input.GetKey(KeyCode.Space) && posY <= 1f) {
+			
 			transform.eulerAngles = new Vector3(45, 0, 0);
-
-			transform.Rotate(Vector3.up * 10f);
+			//print (transform.eulerAngles);
 
 			rb.AddForce(transform.up * 10f);
 
@@ -106,6 +116,7 @@ public class player : MonoBehaviour {
 		if(jumpTime <= 0 && posY == 0 && jumped){
 
 			transform.eulerAngles = new Vector3(0, 0, 90);
+
 			animator.SetBool("jump", false);
 			animator.SetBool("land", true);
 //			animator.SetTrigger("land0");
@@ -116,17 +127,27 @@ public class player : MonoBehaviour {
 
 		//shoot
 		if (Input.GetKey (KeyCode.Z)) {
+
 			transform.eulerAngles = new Vector3(0, 0, 140);
 			animator.SetBool ("shoot", true);
 
 			shootTime += Time.deltaTime;
-			shootThread ();
+			shooted = true;
 
-		}else {
+		}else if (Input.GetKey (KeyCode.Z) == false && shooted) {
+
+			currentPosition = transform.position;
+
 			transform.eulerAngles = new Vector3(0, 0, 90);
 			animator.SetBool ("shoot", false);
+			print (endPosition);
+
+			shootThread ();
 
 			shootTime = 0;
+			shooted = false;
+
+			print (currentPosition);
 
 		}
 
@@ -169,10 +190,10 @@ public class player : MonoBehaviour {
 			lifeCounter -= 8;
 		}
 
-		if (other.tag == "water") {
-			lifeCounter = 0;
-			print ("hit water");
-		}
+//		if (other.tag == "water") {
+//			lifeCounter = 0;
+//			print ("hit water");
+//		}
 	}
 		
 }
