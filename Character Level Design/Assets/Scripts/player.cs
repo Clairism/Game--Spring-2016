@@ -13,7 +13,7 @@ public class player : MonoBehaviour {
 	Vector3 currentPosition;
 	Vector3 endPosition;
 	Vector3 end;
-	float pct = 0;
+//	float pct = 0;
 	public float shootTime;
 	bool shooted;
 
@@ -24,6 +24,9 @@ public class player : MonoBehaviour {
 	public GUIStyle counterStyle;
 	int lifeCounter;
 	float size;
+
+	public GUIStyle textStyle;
+	bool gameOver;
 
 //	float duration = 1f;
 //	float startTime;
@@ -40,12 +43,17 @@ public class player : MonoBehaviour {
 
 		lifeCounter = 50;
 		//size = 1;
+		gameOver = false;
 	}
 
 
 	public virtual void Update () {
 
-		changeStates ();
+		if (!gameOver) {
+			changeStates ();
+		} else {
+			Destroy (GameObject.Find("Spawners"));
+		}
 
 		posX = GetComponent<Transform> ().position.x;
 		posY = GetComponent<Transform> ().position.y;
@@ -148,12 +156,12 @@ public class player : MonoBehaviour {
 			endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
 
 			//lerping if it's close enough
-			if ((endPosition.x - currentPosition.x) <= 2.5f && (endPosition.x - currentPosition.x) >= 0f) {
+			if ((endPosition.x - currentPosition.x) <= 3f && (endPosition.x - currentPosition.x) >= 0f) {
 				
-				transform.position = Vector3.Lerp (currentPosition, endPosition, 1);
+				transform.position = Vector3.Lerp (currentPosition, endPosition, 10);
 
 				end = new Vector3 (endPosition.x + 2.5f, 0, 4);
-				transform.position = Vector3.Lerp (endPosition, end, 1);
+				transform.position = Vector3.Lerp (endPosition, end, 10);
 			}
 
 			shootThread ();
@@ -166,6 +174,9 @@ public class player : MonoBehaviour {
 		//die
 		if(lifeCounter == 0){
 			animator.SetBool ("die", true);
+
+			gameOver = true;
+
 		}
 
 	}
@@ -180,7 +191,12 @@ public class player : MonoBehaviour {
 
 	void OnGUI () {
 
-		GUI.Label(new Rect(Screen.width-200,10,300,30), "Life: " + lifeCounter, counterStyle);
+		GUI.Label(new Rect(Screen.width-100,10,300,30), "Energy: " + lifeCounter, counterStyle);
+
+		if (gameOver) {
+			GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 30, 30), "Game Over!", textStyle);
+		}
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -201,10 +217,10 @@ public class player : MonoBehaviour {
 			lifeCounter -= 8;
 		}
 
-//		if (other.tag == "water") {
-//			lifeCounter = 0;
-//			print ("hit water");
-//		}
+		if (other.tag == "water") {
+			lifeCounter = 0;
+			//print ("hit water");
+		}
 	}
 		
 }
