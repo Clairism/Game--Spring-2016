@@ -15,7 +15,11 @@ public class followPlayer : MonoBehaviour {
 
 			
 		posX = GameObject.Find ("Player").transform.position.x;
+		posY = GameObject.Find ("Player").transform.position.y;
 
-			transform.position = new Vector3 (posX - 1f, 0, 1.6f);
+			//transform.position = new Vector3 (posX - 1f, 0, 1.6f);
+
+		transform.position = new Vector3 (posX-1f, posY, 1.6f);
+
 	}
 }

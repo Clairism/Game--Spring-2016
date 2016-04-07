@@ -15,7 +15,7 @@ public class startGame : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D ootherther){
 
-		Application.LoadLevel ("Level");
-	
+		Application.LoadLevel (1);
+
 	}
 }
