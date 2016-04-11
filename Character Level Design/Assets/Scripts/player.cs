@@ -155,7 +155,9 @@ public class player : MonoBehaviour {
 		}
 
 		//shoot
-		if (Input.GetKeyDown (KeyCode.Z)) {
+		if (Input.GetKeyDown (KeyCode.Z) && !shooted) {
+			
+				GetComponent<SpriteRenderer> ().flipY = false;
 
 				transform.eulerAngles = new Vector3 (0, 0, 140);
 				animator.SetBool ("shoot", true);
@@ -170,10 +172,9 @@ public class player : MonoBehaviour {
 				shooted = false;
 		}
 
-		if (GameObject.Find ("tip") == null) {
+		if (GameObject.Find ("tip") == null && shooted) {
 			animator.SetBool ("shoot", false);
 			transform.eulerAngles = new Vector3 (0, 0, 90);
-
 		}
 
 
