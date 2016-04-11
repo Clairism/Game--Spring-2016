@@ -87,6 +87,11 @@ public class player : MonoBehaviour {
 
 		//lerp to grab
 		currentPosition = transform.position;
+		if (GameObject.Find ("tip") != null) {
+			endPosition = GameObject.Find ("tip").transform.position;
+		} else {
+			endPosition = transform.position;
+		}
 
 		speed = Mathf.Max(speed, .000001f);
 		pct += Time.deltaTime/speed;
@@ -94,14 +99,10 @@ public class player : MonoBehaviour {
 		if ((pct > 1) || (pct < 0)) {
 			//direction = -direction;
 			pct = Mathf.Clamp(pct, 0, 1);
-		}	
+		}
 
 	}
-
-	void FixedUpdate () {
-
-
-	}
+		
 
 	void changeStates(){
 		
@@ -154,25 +155,24 @@ public class player : MonoBehaviour {
 		}
 
 		//shoot
-		if (Input.GetKey (KeyCode.Z)) {
+		if (Input.GetKeyDown (KeyCode.Z)) {
 
-			transform.eulerAngles = new Vector3(0, 0, 140);
-			animator.SetBool ("shoot", true);
+				transform.eulerAngles = new Vector3 (0, 0, 140);
+				animator.SetBool ("shoot", true);
 
-			shootTime += Time.deltaTime;
-			shooted = true;
+				shooted = true;
+				shootThread ();
 
-		}else if (shooted) {
-			
-			transform.eulerAngles = new Vector3(0, 0, 90);
+
+		} else if (shooted  && GameObject.Find ("tip") != null && GameObject.Find ("tip").GetComponent<threadTip> ().hit) {
+
+				transform.position = Vector2.Lerp (currentPosition, endPosition, pct);
+				shooted = false;
+		}
+
+		if (GameObject.Find ("tip") == null) {
 			animator.SetBool ("shoot", false);
-//			endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
-
-		//lerping if it's close enough
-
-			shootThread ();
-			shootTime = 0;
-			shooted = false;
+			transform.eulerAngles = new Vector3 (0, 0, 90);
 
 		}
 
