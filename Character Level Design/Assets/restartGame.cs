@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class startGame : MonoBehaviour {
+public class restartGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,13 +10,10 @@ public class startGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
 
-	void OnTriggerEnter2D (Collider2D other){
-		if (other.tag == "Player") {
+		if (Input.GetKey (KeyCode.R)) {
 			Application.LoadLevel (1);
 		}
-
+	
 	}
 }
