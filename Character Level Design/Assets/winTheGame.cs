@@ -21,7 +21,7 @@ public class winTheGame : MonoBehaviour {
 	void OnGUI () {
 
 		if (win) {
-			GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 50,50), "Welcome Home, little spider.", textStyle);
+			//GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 50,50), "Welcome Home, little spider.", textStyle);
 		}
 
 	}
