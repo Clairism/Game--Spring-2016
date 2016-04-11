@@ -10,12 +10,16 @@ public class foodSpawner : MonoBehaviour {
 	float timer;
 
 	float y;
+	float posX, posY;
 
 	void Start () {
 		num = 1;
 
 		spawnTime = 0.5f;
 		timer = 0;
+
+		posX = transform.position.x;
+		posY = transform.position.y;
 	}
 
 	// Update is called once per frame
@@ -36,9 +40,9 @@ public class foodSpawner : MonoBehaviour {
 		y = Random.Range (-2, 2);
 
 		if (num >= 0.3f) {
-			Instantiate (obj1, new Vector3(10, y, 4), Quaternion.identity);
+			Instantiate (obj1, new Vector3(posX, posY + y, 4), Quaternion.identity);
 		} else {
-			Instantiate (obj2, new Vector3(10, y, 4), Quaternion.identity);
+			Instantiate (obj2, new Vector3(posX, posY + y, 4), Quaternion.identity);
 		}
 		
 	

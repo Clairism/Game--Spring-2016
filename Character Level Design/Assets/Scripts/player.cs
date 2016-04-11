@@ -70,6 +70,7 @@ public class player : MonoBehaviour {
 
 		if(gameOver){
 			Destroy (GameObject.Find("Spawners"));
+			print (gameOver);
 		}
 
 //		posX = GetComponent<Transform> ().position.x;
@@ -125,8 +126,12 @@ public class player : MonoBehaviour {
 
 					transform.position += new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
 				}
+
+				animator.SetBool ("shoot", false);
+
 			} else {
 				animator.SetBool ("run", false);
+
 			}
 
 
@@ -155,7 +160,7 @@ public class player : MonoBehaviour {
 			}
 
 			//shoot
-			if (Input.GetKeyDown (KeyCode.Z) && !shooted) {
+			if (Input.GetKeyDown (KeyCode.Z) && !shooted) {//no double shoot
 			
 				GetComponent<SpriteRenderer> ().flipY = false;
 
@@ -165,18 +170,24 @@ public class player : MonoBehaviour {
 				shooted = true;
 				shootThread ();
 
-
+				//if shooted & has tip
 			} else if (shooted && GameObject.Find ("tip") != null && GameObject.Find ("tip").GetComponent<threadTip> ().hit) {
 
 				transform.position = Vector2.Lerp (currentPosition, endPosition, pct);
 				shooted = false;
+
 			}
 
 			if (GameObject.Find ("tip") == null && shooted) {
 				animator.SetBool ("shoot", false);
 				transform.eulerAngles = new Vector3 (0, 0, 90);
+
+				shooted = false;
 			}
 
+
+
+	//if game over
 		} else {
 			animator.SetBool ("run", false);
 			animator.SetBool ("shoot", false);
@@ -256,11 +267,28 @@ public class player : MonoBehaviour {
 
 		}
 
-		if (other.tag != "Ground" && other.tag != "water") {
+		if (other.tag != "Ground" && other.tag != "Above" && other.tag != "thread" && other.tag != "water") {
 			
 			energyChanged = true;
 		}
+
+//		print (other);
 	}
+
+	void OnTriggerStay2D(Collider2D other){
+		if (other.tag == "movingGround") {
+			transform.parent = other.transform;
+
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other){
+		if (other.tag == "movingGround") {
+			transform.parent = null;
+
+		}
+	}
+		
 
 	void changeEnergyState(){
 		

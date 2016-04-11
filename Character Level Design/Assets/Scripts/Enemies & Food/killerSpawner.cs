@@ -8,10 +8,14 @@ public class killerSpawner : MonoBehaviour {
 	float timer;
 
 	float y;
+	float posX, posY;
 
 	void Start () {
 		spawnTime = 8;
 		timer = 0;
+
+		posX = transform.position.x;
+		posY = transform.position.y;
 	}
 
 	// Update is called once per frame
@@ -31,6 +35,6 @@ public class killerSpawner : MonoBehaviour {
 
 		y = Random.Range (-3, 3);
 
-		Instantiate (obj, new Vector3(10, y, 4), Quaternion.identity);
+		Instantiate (obj, new Vector3(posX, posY + y, 4), Quaternion.identity);
 	}
 }

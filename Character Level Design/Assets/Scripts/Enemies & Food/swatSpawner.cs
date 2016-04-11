@@ -4,6 +4,7 @@ using System.Collections;
 public class swatSpawner : MonoBehaviour {
 
 	public GameObject obj;
+	public int maxTime, minTime;
 	float spawnTime;
 	float timer;
 
@@ -27,7 +28,7 @@ public class swatSpawner : MonoBehaviour {
 
 	void spawn(){
 
-		spawnTime = Random.Range(8, 15);
+		spawnTime = Random.Range(2, 4);
 		//print (spawnTime);
 		Instantiate (obj);	
 	}
