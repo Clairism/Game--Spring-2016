@@ -1,0 +1,13 @@
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/UnityEngine.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/UnityEditor.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Mono.Cecil.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Unity.DataContract.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/Nighttac/Git/Game--Spring-2016/Character Level Design/Temp/bin/Debug/Mono.Cecil.Mdb.dll

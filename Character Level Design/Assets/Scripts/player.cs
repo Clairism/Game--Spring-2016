@@ -7,17 +7,23 @@ public class player : MonoBehaviour {
 	Rigidbody2D rb;
 
 	float playerSpeed;
-	float posX, posY;
+//	float posX, posY;
 	bool flipY;
 
 
 	public GameObject thread;
-	Vector3 currentPosition;
-	Vector3 endPosition;
-	Vector3 end;
-//	float pct = 0;
+	Vector2 currentPosition;
+	Vector2 endPosition;
+	Vector2 end;
+
+//	float direction;
+	float pct = 0.2f;
+	float speed = 0.2f;
+
+
 	public float shootTime;
 	bool shooted;
+	bool grabNow;
 
 	float jumpTime, jumpDelay, jumpForce;
 	bool jumped;
@@ -41,8 +47,9 @@ public class player : MonoBehaviour {
 		animator = GetComponent<Animator>();
 
 		playerSpeed = 5;
-		posX = -4.5f;
+//		posX = -4.5f;
 
+		jumpTime = 0;
 		jumpDelay = 1f;
 		jumpForce = 120f;
 
@@ -59,44 +66,62 @@ public class player : MonoBehaviour {
 
 	void Update () {
 
-		if (!gameOver) {
-			changeStates ();
-		} else {
+		changeStates ();
+
+		if(gameOver){
 			Destroy (GameObject.Find("Spawners"));
 		}
 
-		posX = GetComponent<Transform> ().position.x;
-		posY = GetComponent<Transform> ().position.y;
-
-		//lerp to grab
-
-		currentPosition = transform.position;
+//		posX = GetComponent<Transform> ().position.x;
+//		posY = GetComponent<Transform> ().position.y;
 
 		isGround = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 	
 //		print(isGround);
+
+		if (jumpTime >= 0) {
+			
+			GetComponent<SpriteRenderer> ().flipY = false;
+
+		}
+
+		//lerp to grab
+		currentPosition = transform.position;
+
+		speed = Mathf.Max(speed, .000001f);
+		pct += Time.deltaTime/speed;
+
+		if ((pct > 1) || (pct < 0)) {
+			//direction = -direction;
+			pct = Mathf.Clamp(pct, 0, 1);
+		}	
+
+	}
+
+	void FixedUpdate () {
+
+
 	}
 
 	void changeStates(){
 		
 		//run
-		if (Input.GetAxis ("Horizontal") != 0) {
+		if (Input.GetAxis ("Horizontal") != 0 && !gameOver) {
 				
 			animator.SetBool ("run", true);
 
 			//go left
 			if (Input.GetAxisRaw ("Horizontal") < 0) {
-				if (!isGround) {
-					GetComponent<SpriteRenderer> ().flipY = true;
-				}
+				
+				GetComponent<SpriteRenderer> ().flipY = true;
+
 				transform.position -= new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
 
 				//go right
 			} else if (Input.GetAxisRaw ("Horizontal") > 0) {
-				if (!isGround) {
-					
-					GetComponent<SpriteRenderer> ().flipY = false;
-				}
+
+				GetComponent<SpriteRenderer> ().flipY = false;
+
 				transform.position += new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
 			}
 		} else {
@@ -141,16 +166,9 @@ public class player : MonoBehaviour {
 			
 			transform.eulerAngles = new Vector3(0, 0, 90);
 			animator.SetBool ("shoot", false);
-			endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
+//			endPosition = GameObject.FindGameObjectWithTag("grab").transform.position;
 
-			//lerping if it's close enough
-			if ((endPosition.x - currentPosition.x) <= 3f && (endPosition.x - currentPosition.x) >= 0f) {
-				
-				transform.position = Vector3.Lerp (currentPosition, endPosition, 10);
-
-				end = new Vector3 (endPosition.x + 2.5f, 0, 4);
-				transform.position = Vector3.Lerp (endPosition, end, 10);
-			}
+		//lerping if it's close enough
 
 			shootThread ();
 			shootTime = 0;
@@ -160,7 +178,7 @@ public class player : MonoBehaviour {
 
 
 		//die
-		if(lifeCounter == 0){
+		if(lifeCounter <= 0){
 			animator.SetBool ("die", true);
 
 			gameOver = true;
@@ -186,7 +204,7 @@ public class player : MonoBehaviour {
 		}
 
 		if (energyChanged) {
-			GUI.Label (new Rect (150, Screen.height / 2, 10, 10), "Energy" + energyChange, textStyle);
+			GUI.Label (new Rect (200, Screen.height / 2 - 100f, 10, 10), "Energy" + energyChange, textStyle);
 
 			Invoke ("changeEnergyState", .5f);
 		}
@@ -196,13 +214,13 @@ public class player : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other){
 
 		//energy points
-		if (other.tag == "fly") {
+		if (other.tag == "fly" && !gameOver) {
 			lifeCounter += 3;
 		
 			energyChange = "+3";
 		}
 
-		if (other.tag == "dragonfly") {
+		if (other.tag == "dragonfly" && !gameOver) {
 			lifeCounter += 2;
 
 			energyChange = "+2";
@@ -210,7 +228,7 @@ public class player : MonoBehaviour {
 		
 		}
 
-		if (other.tag == "killer") {
+		if (other.tag == "killer" && !gameOver) {
 			lifeCounter -= 5;
 
 			energyChange = "-5";
@@ -218,24 +236,40 @@ public class player : MonoBehaviour {
 	
 		}
 
-		if (other.tag == "swat") {
+		if (other.tag == "swat" && !gameOver) {
 			lifeCounter -= 8;
+
 			energyChange = "-8";
 
-	
 		}
 
-		if (other.tag == "water") {
+		if (other.tag == "water" && !gameOver) {
 			lifeCounter = 0;
 			//print ("hit water");
 		}
 
 		if (other.tag != "Ground") {
 			
-
 			energyChanged = true;
 		}
 	}
+	/*
+	void OnTriggerStay2D(Collider2D other){
+		
+		if (other.tag == "grab" && !gameOver && shooted) {
+//			transform.position = Vector3.Lerp (currentPosition, endPosition, 0.001f*Time.deltaTime);
+//
+//			end = new Vector3 (endPosition.x + 2.5f, 0, 4);
+//			transform.position = Vector3.Lerp (endPosition, end, 0.001f*Time.deltaTime);
+
+			grabNow = true;
+
+			print ("move");
+		} else {
+			grabNow = false;
+		}
+	}
+	*/
 
 	void changeEnergyState(){
 		energyChanged = false;

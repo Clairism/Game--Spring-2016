@@ -6,40 +6,38 @@ public class shootThreads : MonoBehaviour {
 	LineRenderer line;
 	//public int lengthOfLineRenderer = 5;
 
-	Vector3 player;
-	Vector3 grab;
+	Vector2 player;
+	Vector2 grab;
 
+	float pct;
+	GameObject tip;
 
 	// Use this for initialization
 	void Start () {
 
 		line = GetComponent<LineRenderer>();
-
+		tip = GameObject.Find ("tip");
 		//line.SetVertexCount(lengthOfLineRenderer);
 		player = GameObject.Find ("Player").transform.position;
-		grab = GameObject.FindGameObjectWithTag ("grab").transform.position;
 
+		//line.enabled = false;
 	}
 	// Update is called once per frame
 	void Update () {
 
-		line.SetPosition (0, new Vector3(player.x, player.y, player.z));
 
-		if((grab.x - player.x) <= 2.5f ){
-			
-			line.SetPosition (1, new Vector3(grab.x, grab.y, grab.z));
+		line.SetPosition (0, new Vector2 (player.x, player.y));
 
-			Invoke ("destroy", 3f);
+		pct += 0.03f;
 
+		line.SetPosition (1, new Vector2 (player.x + pct, player.y + pct));
 
-		}else{
-			line.SetPosition (1, new Vector3(player.x + 1f, player.y + 1f, player.z));
+		tip.transform.position = new Vector2 (pct, pct);
 
-			Invoke ("destroy", 1f);
+		if (tip.GetComponent<threadTip> ().hit) {
+			Invoke("destroy", 0.2f);
 		}
-	
 	}
-
 	void destroy(){
 		Destroy (gameObject);
 	}
