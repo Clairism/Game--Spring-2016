@@ -18,5 +18,9 @@ public class destroy : MonoBehaviour {
 		if (other.tag != "Player") {
 			Destroy (other.gameObject);
 		}
+
+		if (other.tag == "Player") {
+			GameObject.Find ("Player").GetComponent<player> ().gameOver = true;;
+		}
 	}
 }

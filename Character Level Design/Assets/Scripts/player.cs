@@ -34,7 +34,7 @@ public class player : MonoBehaviour {
 	float size;
 
 	public GUIStyle textStyle;
-	bool gameOver;
+	public bool gameOver;
 
 	public Transform groundCheck;
 
@@ -105,57 +105,57 @@ public class player : MonoBehaviour {
 		
 
 	void changeStates(){
-		
-		//run
-		if (Input.GetAxis ("Horizontal") != 0 && !gameOver) {
+		if (!gameOver) {
+			//run
+			if (Input.GetAxis ("Horizontal") != 0) {
 				
-			animator.SetBool ("run", true);
+				animator.SetBool ("run", true);
 
-			//go left
-			if (Input.GetAxisRaw ("Horizontal") < 0) {
+				//go left
+				if (Input.GetAxisRaw ("Horizontal") < 0) {
 				
-				GetComponent<SpriteRenderer> ().flipY = true;
+					GetComponent<SpriteRenderer> ().flipY = true;
 
-				transform.position -= new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
+					transform.position -= new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
 
-				//go right
-			} else if (Input.GetAxisRaw ("Horizontal") > 0) {
+					//go right
+				} else if (Input.GetAxisRaw ("Horizontal") > 0) {
 
-				GetComponent<SpriteRenderer> ().flipY = false;
+					GetComponent<SpriteRenderer> ().flipY = false;
 
-				transform.position += new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
+					transform.position += new Vector3 (playerSpeed * Time.deltaTime, 0, 0);
+				}
+			} else {
+				animator.SetBool ("run", false);
 			}
-		} else {
-			animator.SetBool ("run", false);
-		}
 
 
-		//jump
-		if (Input.GetKeyDown (KeyCode.Space) && isGround && !jumped) { //no double-jump
+			//jump
+			if (Input.GetKeyDown (KeyCode.Space) && isGround && !jumped) { //no double-jump
 
-			transform.eulerAngles = new Vector3 (45, 0, 0);
+				transform.eulerAngles = new Vector3 (45, 0, 0);
 
-			rb.AddForce(transform.up * 120f);
+				rb.AddForce (transform.up * 120f);
 
-			jumpTime = jumpDelay;
+				jumpTime = jumpDelay;
 
-			animator.SetBool ("land", false);
-			animator.SetBool ("jump", true);
-			jumped = true;
-		}
+				animator.SetBool ("land", false);
+				animator.SetBool ("jump", true);
+				jumped = true;
+			}
 
-		jumpTime -= Time.deltaTime;
+			jumpTime -= Time.deltaTime;
 
-		if (jumpTime <= 0 && isGround && jumped) {
-			transform.eulerAngles = new Vector3 (0, 0, 90);
+			if (jumpTime <= 0 && isGround && jumped) {
+				transform.eulerAngles = new Vector3 (0, 0, 90);
 
-			animator.SetBool ("jump", false);
-			animator.SetBool ("land", true);
-			jumped = false;
-		}
+				animator.SetBool ("jump", false);
+				animator.SetBool ("land", true);
+				jumped = false;
+			}
 
-		//shoot
-		if (Input.GetKeyDown (KeyCode.Z) && !shooted) {
+			//shoot
+			if (Input.GetKeyDown (KeyCode.Z) && !shooted) {
 			
 				GetComponent<SpriteRenderer> ().flipY = false;
 
@@ -166,20 +166,27 @@ public class player : MonoBehaviour {
 				shootThread ();
 
 
-		} else if (shooted  && GameObject.Find ("tip") != null && GameObject.Find ("tip").GetComponent<threadTip> ().hit) {
+			} else if (shooted && GameObject.Find ("tip") != null && GameObject.Find ("tip").GetComponent<threadTip> ().hit) {
 
 				transform.position = Vector2.Lerp (currentPosition, endPosition, pct);
 				shooted = false;
-		}
+			}
 
-		if (GameObject.Find ("tip") == null && shooted) {
+			if (GameObject.Find ("tip") == null && shooted) {
+				animator.SetBool ("shoot", false);
+				transform.eulerAngles = new Vector3 (0, 0, 90);
+			}
+
+		} else {
+			animator.SetBool ("run", false);
 			animator.SetBool ("shoot", false);
-			transform.eulerAngles = new Vector3 (0, 0, 90);
-		}
+			animator.SetBool ("jump", false);
 
+
+		}
 
 		//die
-		if(lifeCounter <= 0){
+		if(lifeCounter <= 0 || gameOver){
 			animator.SetBool ("die", true);
 
 			gameOver = true;
@@ -198,7 +205,7 @@ public class player : MonoBehaviour {
 
 	void OnGUI () {
 
-		GUI.Label(new Rect(Screen.width-100,10,300,30), "Energy: " + lifeCounter, counterStyle);
+		GUI.Label(new Rect(Screen.width - 200,10,150,100), "Energy: " + lifeCounter, counterStyle);
 
 		if (gameOver) {
 			GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 30, 30), "Game Over!", textStyle);
@@ -207,7 +214,7 @@ public class player : MonoBehaviour {
 		if (energyChanged) {
 			GUI.Label (new Rect (200, Screen.height / 2 - 100f, 10, 10), "Energy" + energyChange, textStyle);
 
-			Invoke ("changeEnergyState", .5f);
+			Invoke ("changeEnergyState", .8f);
 		}
 
 	}
@@ -226,7 +233,6 @@ public class player : MonoBehaviour {
 
 			energyChange = "+2";
 
-		
 		}
 
 		if (other.tag == "killer" && !gameOver) {
@@ -247,32 +253,17 @@ public class player : MonoBehaviour {
 		if (other.tag == "water" && !gameOver) {
 			lifeCounter = 0;
 			//print ("hit water");
+
 		}
 
-		if (other.tag != "Ground") {
+		if (other.tag != "Ground" && other.tag != "water") {
 			
 			energyChanged = true;
 		}
 	}
-	/*
-	void OnTriggerStay2D(Collider2D other){
-		
-		if (other.tag == "grab" && !gameOver && shooted) {
-//			transform.position = Vector3.Lerp (currentPosition, endPosition, 0.001f*Time.deltaTime);
-//
-//			end = new Vector3 (endPosition.x + 2.5f, 0, 4);
-//			transform.position = Vector3.Lerp (endPosition, end, 0.001f*Time.deltaTime);
-
-			grabNow = true;
-
-			print ("move");
-		} else {
-			grabNow = false;
-		}
-	}
-	*/
 
 	void changeEnergyState(){
+		
 		energyChanged = false;
 
 	}
