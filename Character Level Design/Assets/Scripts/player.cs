@@ -71,7 +71,7 @@ public class player : MonoBehaviour {
 
 		if(gameOver){
 			Destroy (GameObject.Find("Spawners"));
-			print (gameOver);
+//			print (gameOver);
 		}
 
 		isGround = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
@@ -224,7 +224,7 @@ public class player : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width - 200,10,150,100), "Energy: " + lifeCounter, counterStyle);
 
 		if (gameOver) {
-			GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 30, 30), "Game Over!", textStyle);
+			GUI.Label (new Rect (Screen.width / 2, Screen.height / 2, 30, 30), "Game Over! \n Press 'R' to restart the game", textStyle);
 		}
 
 		if (energyChanged) {
