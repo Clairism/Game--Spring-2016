@@ -8,11 +8,15 @@ public class swatSpawner : MonoBehaviour {
 	float spawnTime;
 	float timer;
 
+	float pos;
+
 	float x;
 
 	void Start () {
-		spawnTime = 8;
+		spawnTime = 2;
 		timer = 0;
+		pos = transform.position.x;
+
 	}
 	
 	// Update is called once per frame
@@ -28,8 +32,9 @@ public class swatSpawner : MonoBehaviour {
 
 	void spawn(){
 
-		spawnTime = Random.Range(2, 4);
+		spawnTime = Random.Range(4, 8);
 		//print (spawnTime);
-		Instantiate (obj);	
+		Instantiate (obj, new Vector3(pos, 6.0f, 4), Quaternion.identity);
+
 	}
 }

@@ -35,7 +35,7 @@ public class foodSpawner : MonoBehaviour {
 
 	void spawn(){
 		num = Random.Range (0f,1f);
-		spawnTime = Random.Range(1f, 5f);
+		spawnTime = Random.Range(2f, 5f);
 
 		y = Random.Range (-2, 2);
 

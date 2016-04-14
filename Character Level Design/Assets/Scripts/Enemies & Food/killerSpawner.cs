@@ -31,7 +31,7 @@ public class killerSpawner : MonoBehaviour {
 
 	void spawn(){
 
-		spawnTime = Random.Range(5, 12);
+		spawnTime = Random.Range(8, 15);
 
 		y = Random.Range (-3, 3);
 

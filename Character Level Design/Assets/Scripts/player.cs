@@ -7,7 +7,8 @@ public class player : MonoBehaviour {
 	Rigidbody2D rb;
 
 	float playerSpeed;
-//	float posX, posY;
+//	float posX, 
+	float posY;
 	bool flipY;
 
 
@@ -73,9 +74,6 @@ public class player : MonoBehaviour {
 			print (gameOver);
 		}
 
-//		posX = GetComponent<Transform> ().position.x;
-//		posY = GetComponent<Transform> ().position.y;
-
 		isGround = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 	
 //		print(isGround);
@@ -100,6 +98,13 @@ public class player : MonoBehaviour {
 		if ((pct > 1) || (pct < 0)) {
 			//direction = -direction;
 			pct = Mathf.Clamp(pct, 0, 1);
+		}
+
+		posY = GetComponent<Transform> ().position.y;
+
+		//if fall
+		if (posY <= -5.5f) {
+			gameOver = true;
 		}
 
 	}
@@ -268,7 +273,7 @@ public class player : MonoBehaviour {
 		}
 
 		if (other.tag != "Ground" && other.tag != "Above" && other.tag != "thread" && other.tag != "water") {
-			
+
 			energyChanged = true;
 		}
 

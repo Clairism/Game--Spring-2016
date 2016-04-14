@@ -40,7 +40,7 @@ public class shootThreads : MonoBehaviour {
 //			} else {
 //				pct -= 0.05f;
 //			}
-			Invoke ("destroy", 2.5f);
+			Invoke ("destroy", 1.8f);
 
 		} else{
 			Invoke ("destroy", 0.6f);
