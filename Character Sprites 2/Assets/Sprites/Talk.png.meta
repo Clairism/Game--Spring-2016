@@ -1,0 +1,211 @@
+fileFormatVersion: 2
+guid: 0c1a3c11954cdce429637935574880a3
+timeCreated: 1459135496
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Talk_0
+    21300002: Talk_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Talk_0
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 7
+        width: 314
+        height: 1013
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 147, y: -438.5}
+        - {x: 147, y: -325.5}
+        - {x: 144, y: -160.5}
+        - {x: 145, y: -111.5}
+        - {x: 155, y: -43.5}
+        - {x: 157, y: -29.5}
+        - {x: 157, y: 101.5}
+        - {x: 155, y: 122.5}
+        - {x: 148, y: 154.5}
+        - {x: 142, y: 176.5}
+        - {x: 128, y: 212.5}
+        - {x: 122, y: 229.5}
+        - {x: 87, y: 300.5}
+        - {x: 60, y: 340.5}
+        - {x: 27, y: 383.5}
+        - {x: 0, y: 412.5}
+        - {x: -46, y: 448.5}
+        - {x: -85, y: 473.5}
+        - {x: -93, y: 478.5}
+        - {x: -127, y: 496.5}
+        - {x: -150, y: 496.5}
+        - {x: -157, y: 490.5}
+        - {x: -157, y: 470.5}
+        - {x: -155, y: 466.5}
+        - {x: -150, y: 459.5}
+        - {x: -119, y: 428.5}
+        - {x: -83, y: 395.5}
+        - {x: -65, y: 371.5}
+        - {x: -55, y: 349.5}
+        - {x: -45, y: 303.5}
+        - {x: -51, y: 249.5}
+        - {x: -58, y: 233.5}
+        - {x: -101, y: 146.5}
+        - {x: -111, y: 117.5}
+        - {x: -117, y: 92.5}
+        - {x: -123, y: 46.5}
+        - {x: -122, y: 13.5}
+        - {x: -120, y: 0.5}
+        - {x: -113, y: -21.5}
+        - {x: -98, y: -48.5}
+        - {x: -85, y: -68.5}
+        - {x: -44, y: -110.5}
+        - {x: -26, y: -143.5}
+        - {x: -12, y: -184.5}
+        - {x: -3, y: -257.5}
+        - {x: -2, y: -258.5}
+        - {x: -2, y: -424.5}
+        - {x: -1, y: -451.5}
+        - {x: 2, y: -491.5}
+        - {x: 16, y: -506.5}
+        - {x: 30, y: -506.5}
+        - {x: 34, y: -505.5}
+        - {x: 47, y: -487.5}
+        - {x: 59, y: -414.5}
+        - {x: 63, y: -367.5}
+        - {x: 71, y: -251.5}
+        - {x: 74, y: -289.5}
+        - {x: 84, y: -385.5}
+        - {x: 93, y: -475.5}
+        - {x: 92, y: -485.5}
+        - {x: 105, y: -506.5}
+        - {x: 123, y: -506.5}
+        - {x: 129, y: -504.5}
+        - {x: 136, y: -496.5}
+        - {x: 142, y: -481.5}
+        - {x: 146, y: -458.5}
+    - name: Talk_1
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 8
+        width: 318
+        height: 1009
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 65, y: -358.5}
+        - {x: 67, y: -307.5}
+        - {x: 71, y: -255.5}
+        - {x: 78, y: -317.5}
+        - {x: 91, y: -457.5}
+        - {x: 94, y: -479.5}
+        - {x: 97, y: -493.5}
+        - {x: 104, y: -504.5}
+        - {x: 130, y: -504.5}
+        - {x: 141, y: -488.5}
+        - {x: 146, y: -462.5}
+        - {x: 148, y: -387.5}
+        - {x: 147, y: -305.5}
+        - {x: 145, y: -202.5}
+        - {x: 144, y: -201.5}
+        - {x: 145, y: -113.5}
+        - {x: 147, y: -100.5}
+        - {x: 154, y: -60.5}
+        - {x: 159, y: -24.5}
+        - {x: 159, y: 88.5}
+        - {x: 158, y: 94.5}
+        - {x: 154, y: 129.5}
+        - {x: 148, y: 156.5}
+        - {x: 134, y: 201.5}
+        - {x: 107, y: 262.5}
+        - {x: 87, y: 299.5}
+        - {x: 75, y: 320.5}
+        - {x: 36, y: 374.5}
+        - {x: -11, y: 421.5}
+        - {x: -30, y: 437.5}
+        - {x: -96, y: 481.5}
+        - {x: -127, y: 496.5}
+        - {x: -152, y: 496.5}
+        - {x: -158, y: 487.5}
+        - {x: -158, y: 474.5}
+        - {x: -155, y: 465.5}
+        - {x: -134, y: 443.5}
+        - {x: -98, y: 411.5}
+        - {x: -64, y: 370.5}
+        - {x: -56, y: 353.5}
+        - {x: -45, y: 307.5}
+        - {x: -45, y: 279.5}
+        - {x: -50, y: 248.5}
+        - {x: -99, y: 150.5}
+        - {x: -106, y: 132.5}
+        - {x: -118, y: 86.5}
+        - {x: -122, y: 56.5}
+        - {x: -121, y: 7.5}
+        - {x: -114, y: -18.5}
+        - {x: -98, y: -49.5}
+        - {x: -81, y: -71.5}
+        - {x: -40, y: -112.5}
+        - {x: -24, y: -147.5}
+        - {x: -6, y: -218.5}
+        - {x: -2, y: -282.5}
+        - {x: -2, y: -409.5}
+        - {x: -1, y: -463.5}
+        - {x: 4, y: -489.5}
+        - {x: 8, y: -497.5}
+        - {x: 17, y: -504.5}
+        - {x: 34, y: -504.5}
+        - {x: 41, y: -498.5}
+        - {x: 47, y: -484.5}
+        - {x: 58, y: -424.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
